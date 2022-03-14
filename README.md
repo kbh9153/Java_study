@@ -1,2 +1,2 @@
-# java_practice01
+# Java_study
 Java study
