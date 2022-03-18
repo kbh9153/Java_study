@@ -1,10 +1,13 @@
 package chap11.Ex06;
 
-abstract class Animal {
+abstract class Animal {		// 추상 class : 추상 method가 하나이상 포함되어 있는 경우
+							// 추상 class는 객체 생성 불가. 타입은 생성 가능
+								// 자식 class는 부모 class의 method를 구현시 오류를 방지
 	String name;
 	int age;
 	
-	abstract void cry(); 
+	abstract void cry();
+	// void cry() {} => 일반 method : return 타입 method 이름 (입력매개변수) {구현코드}
 	abstract void run(); 
 	
 	@Override
@@ -13,14 +16,15 @@ abstract class Animal {
 	}
 }
 
-class Cat extends Animal {
+class Cat extends Animal {		// Cat은 Animal 상속
+								// 모두 추상 method를 구현한 경우는 콘크리트(완전히 구현된) class
 	Cat(String name, int age) {
 		super.name = name;
 		super.age = age;
 	}
 	
 	@Override
-	void cry() {
+	void cry() {		// 추상 method를 구현한 method
 		System.out.println("cry : 야옹");
 	}
 	
