@@ -28,8 +28,8 @@ class A {		// Outer class : 모든 접근 제어자를 내부 class에서 접근 가능
 	//	InnerClass
 	class B {		// 인스턴스 내부 class : 외부 class가 객체화 되어야 사용 가능 
 		void bcd() {		// Outer class의 필드 접근 가능 여부 확인
-			System.out.println(a);
-			System.out.println(b);
+			System.out.println(a);		// this.a => this가 생략되어 있는 상태
+			System.out.println(b);		// this.b
 			System.out.println(c);
 			System.out.println(d);
 			abc();		 // Outer class의 method 접근 가능 여부 확인
