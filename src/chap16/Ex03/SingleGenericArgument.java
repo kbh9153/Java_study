@@ -7,6 +7,7 @@ package chap16.Ex03;
  * 		1) A ~ Z 임의로 넣을 수 있음
  * 		2) wrapper class : 기본 타입을 객체화 시켜 놓은 class
  * 			※ int(기본타입) -> Integer(객체형 타입), boolean -> Boolean, Char -> Character, double -> Double, float -> Float
+ * 			※ byte -> Byte, short -> Short, long -> Long
  * 			※ 특정 타입을 사용하지 않을 경우 Void 사용
  */
 	
