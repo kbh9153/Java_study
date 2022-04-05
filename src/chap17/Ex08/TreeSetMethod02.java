@@ -1,5 +1,6 @@
 package chap17.Ex08;
 
+import java.util.Comparator;
 import java.util.TreeSet;
 
 /*
@@ -13,9 +14,12 @@ import java.util.TreeSet;
  * 
  * TreeSet에 일반 객체를 저장할 경우, 특정 필드를 크기 비교 기준 필드가 존재해야함
  * 	1. Comparable<E> interface의 compareTo() method : TreeSet에 일반 객체를 저장할 때 일반 객체의 특정 필드를 Comparable를 재정의 해야함
- * 	2. Comparable<E> interface의 compareTo() method 재정의함
- * 	3. 익명 내부 객체를 사용해서 처리하는 방법 
+ * 		=> 기존의 class를 수정해서 사용
+ * 	2. Comparable<E> interface의 compareTo() method 재정의함 (익명내부 객체를 사용)
+ * 		=> 기존의 객체를 수정하지 않고 사용할 때
+ *		=> TreeSet<E> 객체를 생성할 때 생성자에 Comparator<E> interface를 구현한 익명 객체를 생성
  */
+
 
 class MyClass {		// CompareTo() 재정의되지 않아 TreeSet에 사용 불가
 	int data1;
@@ -26,6 +30,10 @@ class MyClass {		// CompareTo() 재정의되지 않아 TreeSet에 사용 불가
 		this.data2 = data2;
 	}
 	
+	@Override
+	public String toString() {
+		return data1 + " " + data2;
+	}
 }
 
 // Comparable<E> interface를 구현한 class 생성
@@ -40,13 +48,24 @@ class MyComparableClass implements Comparable<MyComparableClass> {		//
 	
 	@Override
 	public int compareTo(MyComparableClass o) {		// compareTo 재정의. 객체의 크기 비교 기준을 설정하는 method => TreeSet에서 사용 (음수, 0, 양수)
-													// 오름차순 처리 방식
+		// 오름차순 처리 방식
+		/*
 		if (this.data1 < o.data1) {		// this.data1 기준 값이 작을 경우 : -1 (음수)
 			return -1;
-		} else if (this.data1 == o.data1) {		// this.data1 기준 값이 작을 경우 : -1 (음수)
+		} else if (this.data1 == o.data1) {		// this.data1 기준 값이 클 경우 : -1 (음수)
 			return 0;
 		} else {		// this.data1 기준 값이 작을 경우 : +1 (양수)
 			return 1;
+		}
+		*/
+		
+		// 내림차순 처리 방식
+		if (this.data1 < o.data1) {		// this.data1 기준 값이 작을 경우 : 1 (양수)
+			return 1;
+		} else if (this.data1 == o.data1) {		// this.data1 기준 값이 작을 경우 : -1 (음수)
+			return 0;
+		} else {		// this.data1 기준 값이 클 경우 : -1 (음수)
+			return -1;
 		}
 		
 	}
@@ -57,6 +76,8 @@ class MyComparableClass implements Comparable<MyComparableClass> {		//
 	}
 	
 }
+
+
 
 public class TreeSetMethod02 {
 
@@ -87,17 +108,19 @@ public class TreeSetMethod02 {
 		
 		// 3. MyClass가 TreeSet에 저장이 될까? => Compareable<E> interface의 compareTo() method가 재정의 되어야 TreeSet collection에 저장 가능
 		/*
-		 * TreeSet<MyClass> treeSet3 = new TreeSet<MyClass>(); MyClass myClass1 = new
-		 * MyClass(2, 5); MyClass myClass2 = new MyClass(3, 3);
+		 * TreeSet<MyClass> treeSet3 = new TreeSet<MyClass>();
+		 * MyClass myClass1 = new MyClass(2, 5);
+		 * MyClass myClass2 = new MyClass(3, 3);
 		 * 
 		 * treeSet3.add(myClass1); // TreeSet에는 comparable<E> interface의 compareTo()
 		 * method를 재정의한 class만 넣을 수 있음 treeSet3.add(myClass2); // 실행시 Runtime 오류 발생
 		 * System.out.println(treeSet3);
 		 */
 		
-		// 4. MyComparableClass 객체 크기 비교
+		// TreeSet에 일반 객체를 저장할 경우
+		// 4-1. MyComparableClass 객체 크기 비교. 기존 객체의 수정이 필요. 다시 컴파일
 		TreeSet<MyComparableClass> treeSet4 = new TreeSet<MyComparableClass>();
-		MyComparableClass mcc1 = new MyComparableClass(2, 5);
+		MyComparableClass mcc1 = new MyComparableClass(2, 5);		// TreeSet에 저장될 때 comparable<E> interface의 compareTo() method를 재정의해둬야함
 		MyComparableClass mcc2 = new MyComparableClass(5, 3);
 		MyComparableClass mcc3 = new MyComparableClass(4, 3);
 		
@@ -107,8 +130,32 @@ public class TreeSetMethod02 {
 		
 		System.out.println(treeSet4);
 		
+		System.out.println("------------------");
 		
+		// 4-2. 기존 객체를 수정하지 않고T TreeSet에 저장할 경우
+		// TreeSet 생성자 내부에 Comparator<E> interface의 compare()를 재정의해서 익명객체로 구현
+		TreeSet<MyClass> treeSet5 = new TreeSet<MyClass>(new Comparator<MyClass>() {
+			// Comparator<MyClass>를 구현한 익명 자식 class 블록
+			@Override
+			public int compare(MyClass o1, MyClass o2) {		// 오름차순 정렬 처리(data1)
+				if (o1.data1 < o2.data1) {
+					return -1;
+				} else if (o1.data1 == o2.data1) {
+					return 0;
+				} else {
+					return 1;
+				}
+			}
+		});
+		MyClass myClass1 = new MyClass(2, 5);
+		MyClass myClass2 = new MyClass(5, 7);
+		MyClass myClass3 = new MyClass(3, 3);
 		
+		treeSet5.add(myClass1);
+		treeSet5.add(myClass2);
+		treeSet5.add(myClass3);
+		
+		System.out.println(treeSet5);
 	}
 
 }
