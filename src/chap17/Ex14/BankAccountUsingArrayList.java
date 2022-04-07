@@ -89,9 +89,9 @@ public class BankAccountUsingArrayList {
 		}
 		
 		//배열의 각방의 null아닌 경우 , 객체의 필드의 값을 출력. 
-		for ( int i = 0 ; i <  accountArrayList.length; i++) {
+		for ( int i = 0 ; i <  accountArrayList.size(); i++) {
 			//각 방의 객체를 담는 변수를 선언 
-			Account account = accountArrayList[i];    // 0 ~ 99 방의 객체를 account 참조 변수에 담는다. 
+			Account account = accountArrayList.get(i);    // 0 ~ 99 방의 객체를 account 참조 변수에 담는다. 
 			if (account != null) {    //각 방의 값이 null이 아닐 경우만 객체정보를 가져와서 출력. 
 				System.out.print(account.getAno());  //계좌 정보. 
 				System.out.print("    ");
