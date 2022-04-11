@@ -6,7 +6,7 @@ import java.io.UnsupportedEncodingException;
  * EUCKR - 한국 표준, 한글 표현 가능 전체중 표기 가능한것만 구성되어 있음. 약 11,000 중 2,200자 표기 가능 => 8,000자는 표기 안됨
  * 	- 영문 : 1byte
  * 	- 한글 : 2byte
- * MS949 - 마이크로소프트에서 개발한 한글 표기 방식. 약 11,000자 모두 표기 가능. Windows OS는 MS949가 기본
+ * MS949(=ANSI) - 마이크로소프트에서 개발한 한글 표기 방식. 약 11,000자 모두 표기 가능. Windows OS는 MS949가 기본
  * 	- 영문 : 1byte
  *  - 한글 : 2byte
  *  
@@ -16,6 +16,8 @@ import java.io.UnsupportedEncodingException;
  * 
  * UTF-16 < 고정길이 >
  * 	- 영문, 한글 모두 2byte로 처리
+ * 	- BOM : 모든 나라 언어의 식별코드. 2byte로 처리
+ *		=> 모든 나라의 언어를 처리
  * 
  * 문자를 해당 인코딩 타입의 바이트 스트림으로 생선한 경우, 해당 인코딩 타입으로 조합을 해야 문자가 깨지지 않음
  * 

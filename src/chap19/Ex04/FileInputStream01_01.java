@@ -10,7 +10,7 @@ public class FileInputStream01_01 {
 	
 	public static void main(String[] args) {
 		File inFile = new File("src\\chap19\\files\\FileInputStrea01.txt");
-		
+
 		// 예외 처리 : 2개의 예외에 대해서 각각 처리
 		InputStream is = null;
 		try {

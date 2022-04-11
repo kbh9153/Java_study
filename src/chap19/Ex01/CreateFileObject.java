@@ -54,7 +54,7 @@ public class CreateFileObject {
 		File newFile4 = new File("C:" + File.separator + "kosmo" + File.separator + "02_java" + File.separator + "temp01" + File.separator + "newfile04.txt");
 		if (!newFile4.exists()) {newFile4.createNewFile();}
 
-		// 4. 절대 경로로 처리 : 다른 시스템으로 인동된 경우 그 시스템 환경에 맞도곷 셋팅이 필요
+		// 4. 절대 경로로 처리 : 다른 시스템으로 인동된 경우 그 시스템 환경에 맞도록 셋팅이 필요
 		File newFile5 = new File("C://kosmo/02_java/temp01/newfile03.txt");
 		System.out.println(newFile5.getAbsolutePath());		// file 객체에 저장된 파일의 절대경로를 출력
 		

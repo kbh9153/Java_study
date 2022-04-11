@@ -23,10 +23,16 @@ public class FIleInputStream01 {
 		
 		// 파일의 내용을 출력
 		
-		// UTF-8 : 영어 1byte, 한글 3byte 처리
-		// MS949 : 영어 1byte, 한글 2byte 처리
-		// EUC_KR : 영어 1byte, 한글은 2byte 처리
-		// UTF-16 : 영어, 한글 2byte, 첫번째 BOM(식별자 코드) 2byte
+		/*
+		 * UTF-8 : 영어 1byte, 한글 3byte 처리
+		 * MS949 : 영어 1byte, 한글 2byte 처리
+		 * EUC_KR : 영어 1byte, 한글은 2byte 처리
+		 * UTF-16 : 영어, 한글 2byte, 첫번째 BOM(식별자 코드) 2byte
+		 * 	- UNIX : \n
+		 * 	- Windows : \r\n => \r은 생략해도 됨. 콘솔이나 메모장에서 enter : \r\n
+		 * 	- MAC : \r
+		 */
+		
 		
 		// 1byte 데이터를 읽어서 char로 변환 후 출력
 		System.out.print(is.read());	// read() 메소드는 1byte씩 읽어옴
@@ -56,9 +62,14 @@ public class FIleInputStream01 {
 		
 		int data;
 		
-		while ((data = is1.read()) != -1) {		// 마지막 값까지 계속 순환
+		while ((data = is1.read()) != -1) {		// 마지막 값까지 계속 순환 (-1 : 값이 더이상 존재하지 않으면 -1)
 			System.out.print((char)data);
 		}
+		
+		// 중요 : .read()는 1byte 씩 읽어옴
+		// 
+		// FileInputStream은 처음부터 index 0번부터 읽어옴. 중간의 임의의 방에서 읽어올 수 없음
+			// FileRandomAccess를 사용해서 임의의 index에서 읽어옴
 		
 		System.out.println();
 		System.out.println();

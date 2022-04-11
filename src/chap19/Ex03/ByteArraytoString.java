@@ -33,7 +33,7 @@ public class ByteArraytoString {
 		System.out.println(str4);
 		System.out.println();
 		
-		// 4. 한글이 꺠지는 경우 : 인코딩 타입과 디코딩 타입이 다를 경우
+		// 4. 한글이 깨지는 경우 : 인코딩 타입과 디코딩 타입이 다를 경우
 		String str5 = new String(array1, Charset.forName("UTF-8"));
 		String str6 = new String(array1, Charset.forName("MS949"));
 		String str7 = new String(array3, Charset.forName("UTF-8"));
