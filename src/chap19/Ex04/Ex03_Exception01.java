@@ -16,7 +16,7 @@ import java.nio.charset.Charset;
 public class Ex03_Exception01 {
 
 	public static void main(String[] args) {
-		File file1 = new File("D:/kbh/02_java/src/chap19/Ex04/exception_ms949.txt");
+		File file1 = new File("D:/kbh/02_java/src/chap19/Ex04/file/file_ms949.txt");
 		
 		InputStream is1 = null;
 		int data1 = 0;
@@ -32,8 +32,7 @@ public class Ex03_Exception01 {
 		
 		try {
 			array1 = new byte[is1.available()];
-			
-			while ((data1 = is1.read()) != -1) {
+			while ((data1 = is1.read(array1)) != -1) {
 			array1[index1] = (byte)data1;
 			index1++;
 			}
@@ -58,7 +57,7 @@ public class Ex03_Exception01 {
 		System.out.println("========================");
 		System.out.println();
 				
-		File file2 = new File("src/chap19/Ex04/exception_utf8.txt");
+		File file2 = new File("src/chap19/Ex04/file/file_utf8.txt");
 		
 		InputStream is2 = null;
 		byte[] array2 = null;
@@ -74,7 +73,7 @@ public class Ex03_Exception01 {
 		
 		try {
 			array2 = new byte[is2.available()];
-			while ((data2 = is2.read()) != -1) {
+			while ((data2 = is2.read(array2)) != -1) {
 			array2[index2] = (byte)data2;
 			index2++;
 			}
