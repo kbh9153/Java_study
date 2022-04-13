@@ -33,8 +33,8 @@ public class Ex03_Exception01 {
 		try {
 			array1 = new byte[is1.available()];
 			while ((data1 = is1.read(array1)) != -1) {
-			array1[index1] = (byte)data1;
-			index1++;
+				array1[index1] = (byte)data1;
+				index1++;
 			}
 			
 			String str1 = new String(array1, Charset.forName("MS949"));
